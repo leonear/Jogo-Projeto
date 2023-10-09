@@ -1,1 +1,2 @@
-#jogo2
+#jogo
+import pygame;
