@@ -7,15 +7,14 @@ import time
 
 
 pygame.init()
-speed = 50
-
+speed = 5
 
 
 # extracting game items and characters form the resource.png image.
 player_init = Image.open("resources.png").crop((77,5,163,96)).convert("RGBA")
 player_init = player_init.resize(list(map(lambda x:x//2 , player_init.size)))
 
-player_frame_1 = Image.open("resources.dpng").crop((1679,2,1765,95)).convert("RGBA")
+player_frame_1 = Image.open("resources.png").crop((1679,2,1765,95)).convert("RGBA")
 player_frame_1 = player_frame_1.resize(list(map(lambda x:x//2 , player_frame_1.size)))
 
 player_frame_2 = Image.open("resources.png").crop((1767,2,1853,95)).convert("RGBA")
