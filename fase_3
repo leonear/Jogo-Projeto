@@ -19,8 +19,7 @@ obstacle_image_jump = pygame.transform.scale(obstacle_image_jump, (50, 50))
 obstacle_image_ast = pygame.image.load("asteroid.png")
 obstacle_image_ast = pygame.transform.scale(obstacle_image_ast, (50, 50))
 
-tsunami_image = pygame.image.load("tsunami.png")
-tsunami_image = pygame.transform.scale(tsunami_image, (2200, 300))
+
 background = pygame.image.load("fundo.png")
 background = pygame.transform.scale(background, (3200, 430))
 
@@ -143,7 +142,6 @@ while True:
     for i, obstacle in enumerate(obstacles_low):  
         gameDisplay.blit(obstacle_image_ast, (obstacle.x, obstacle.y))
 
-    gameDisplay.blit(tsunami_image, (tsunami_x, 120))
 
     if game_over_text:
         gameDisplay.blit(game_over_text, (700, 200))
