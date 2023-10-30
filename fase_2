@@ -11,7 +11,11 @@ player_image = pygame.transform.scale(player_image, (60, 60))
 ground_image = pygame.image.load("ground.png")
 ground_image = pygame.transform.scale(ground_image, (2600, 190))
 obstacle_image = pygame.image.load("obstacle.png")
-obstacle_image = pygame.transform.scale(obstacle_image, (40, 60))
+obstacle_image = pygame.transform.scale(obstacle_image, (70, 70))
+
+obstacle_image_jump = pygame.image.load("tire.png")
+obstacle_image_jump = pygame.transform.scale(obstacle_image_jump, (50, 50))
+
 tsunami_image = pygame.image.load("tsunami.png")
 tsunami_image = pygame.transform.scale(tsunami_image, (2200, 300))
 background = pygame.image.load("fundo.png")
@@ -33,10 +37,10 @@ background_x = 0
 obstacles = []
 obstacles_jump = []
 
-# Variáveis para controlar o movimento vertical dos obstáculos pulantes
-obstacles_jump_y = 350  # Altura inicial dos obstáculos pulantes
-obstacles_jump_speed = 2  # Velocidade de subida/descida dos obstáculos pulantes
-obstacles_jump_direction = 1  # Direção inicial de movimento (1 = para cima, -1 = para baixo)
+
+obstacles_jump_y = 350  
+obstacles_jump_speed = 2  
+obstacles_jump_direction = 1  
 
 def check_collision(player_x, player_y, obstacles):
     player_rect = pygame.Rect(player_x, player_y, player_image.get_width(), player_image.get_height())
@@ -81,7 +85,7 @@ while True:
             obstacles.append(pygame.Rect(1600, 350, obstacle_image.get_width(), obstacle_image.get_height()))
 
         if random.randint(0, 500) < 2:
-            obstacles_jump.append(pygame.Rect(1600, obstacles_jump_y, obstacle_image.get_width(), obstacle_image.get_height()))
+            obstacles_jump.append(pygame.Rect(1600, obstacles_jump_y, obstacle_image_jump.get_width(), obstacle_image_jump.get_height()))
 
         for obstacle in obstacles:
             obstacle.x -= obstacle_speed
@@ -103,9 +107,9 @@ while True:
             tsunami_speed = 0
 
     obstacles_jump_y += obstacles_jump_speed * obstacles_jump_direction
-    if obstacles_jump_y < 300:
+    if obstacles_jump_y < 260:
         obstacles_jump_direction = 1
-    if obstacles_jump_y > 350:
+    if obstacles_jump_y > 370:
         obstacles_jump_direction = -1
 
     gameDisplay.blit(background, (background_x, 0))
@@ -117,7 +121,7 @@ while True:
         gameDisplay.blit(obstacle_image, (obstacle.x, obstacle.y))
 
     for obstacle in obstacles_jump:
-        gameDisplay.blit(obstacle_image, (obstacle.x, obstacles_jump_y))
+        gameDisplay.blit(obstacle_image_jump, (obstacle.x, obstacles_jump_y))
 
     gameDisplay.blit(tsunami_image, (tsunami_x, 120))
 
