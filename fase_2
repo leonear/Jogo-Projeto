@@ -18,7 +18,7 @@ obstacle_image_jump = pygame.transform.scale(obstacle_image_jump, (50, 50))
 
 tsunami_image = pygame.image.load("tornado.png")
 tsunami_image = pygame.transform.scale(tsunami_image, (500, 300))
-background = pygame.image.load("fundo.png")
+background = pygame.image.load("fundo_2.png")
 background = pygame.transform.scale(background, (3200, 430))
 
 player_x = 400
@@ -55,7 +55,7 @@ game_over_text = None
 clock = pygame.time.Clock()
 
 while True:
-    gameDisplay.fill((112, 154, 209))
+    gameDisplay.fill((127,127,127))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
