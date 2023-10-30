@@ -20,7 +20,7 @@ obstacle_image_ast = pygame.image.load("asteroid.png")
 obstacle_image_ast = pygame.transform.scale(obstacle_image_ast, (50, 50))
 
 
-background = pygame.image.load("fundo.png")
+background = pygame.image.load("fundo_3.png")
 background = pygame.transform.scale(background, (3200, 430))
 
 player_x = 400
@@ -58,7 +58,7 @@ game_over_text = None
 clock = pygame.time.Clock()
 
 while True:
-    gameDisplay.fill((112, 154, 209))
+    gameDisplay.fill((135,41,1))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
