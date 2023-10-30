@@ -16,8 +16,8 @@ obstacle_image = pygame.transform.scale(obstacle_image, (70, 70))
 obstacle_image_jump = pygame.image.load("tire.png")
 obstacle_image_jump = pygame.transform.scale(obstacle_image_jump, (50, 50))
 
-tsunami_image = pygame.image.load("tsunami.png")
-tsunami_image = pygame.transform.scale(tsunami_image, (2200, 300))
+tsunami_image = pygame.image.load("tornado.png")
+tsunami_image = pygame.transform.scale(tsunami_image, (500, 300))
 background = pygame.image.load("fundo.png")
 background = pygame.transform.scale(background, (3200, 430))
 
@@ -29,7 +29,7 @@ player_y_limit = 360
 ground_x = 0
 ground_speed = 7
 obstacle_speed = 7
-tsunami_x = -1750
+tsunami_x = -100
 tsunami_speed = 10
 background_speed = 3
 background_x = 0
@@ -103,7 +103,7 @@ while True:
             
     else:
         tsunami_x += tsunami_speed
-        if tsunami_x > 20:
+        if tsunami_x > 1000:
             tsunami_speed = 0
 
     obstacles_jump_y += obstacles_jump_speed * obstacles_jump_direction
@@ -123,7 +123,7 @@ while True:
     for obstacle in obstacles_jump:
         gameDisplay.blit(obstacle_image_jump, (obstacle.x, obstacles_jump_y))
 
-    gameDisplay.blit(tsunami_image, (tsunami_x, 120))
+    gameDisplay.blit(tsunami_image, (tsunami_x, 180))
 
     if game_over_text:
         gameDisplay.blit(game_over_text, (700, 200))
