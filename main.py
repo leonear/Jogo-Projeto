@@ -75,11 +75,11 @@ while menu_principal:
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_1]:
-                selected_game = "fase_1"
+                selected_game = "fase_1.py"
             elif keys[pygame.K_2]:
-                selected_game = "fase_2"
+                selected_game = "fase_2.py"
             elif keys[pygame.K_3]:
-                selected_game = "fase_3"
+                selected_game = "fase_3.py"
             elif keys[pygame.K_ESCAPE]:
                 menu_jogar = False
                 menu_principal = True
