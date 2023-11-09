@@ -136,11 +136,16 @@ while menu_principal:
             font = pygame.font.Font(None, 36)
             creditos_text = font.render("Controles: ", True, (255, 255, 255))
             orientacoes_text = font.render("Pressione SPACE para pular", True, (255, 255, 255))
+            orientacoes_text2 = font.render("Pressione S para cair mais rapido", True, (255, 255, 255))
+            orientacoes_text3 = font.render("Pressione M para silenciar o jogo e U para retomar a música", True, (255, 255, 255))
+
             retornar = font.render("Pressione Esc para retornar", True, (255, 255, 255))
 
             gameDisplay.blit(creditos_text, (575, 100))
-            gameDisplay.blit(orientacoes_text, (600, 150))
-            gameDisplay.blit(retornar, (575, 250))
+            gameDisplay.blit(orientacoes_text, (575, 150))
+            gameDisplay.blit(orientacoes_text2, (575, 200))
+            gameDisplay.blit(orientacoes_text3, (575, 250))
+            gameDisplay.blit(retornar, (575, 300))
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_ESCAPE]:
