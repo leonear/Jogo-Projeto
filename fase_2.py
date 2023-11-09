@@ -99,6 +99,10 @@ while True:
             player_y_change += 0.9
         player_y += player_y_change
 
+        if keys[pygame.K_s] and player_y < player_y_limit:
+            player_y_change = +20
+
+
         if player_y > player_y_limit:
             player_y = player_y_limit
 
