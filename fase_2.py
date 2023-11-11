@@ -8,10 +8,10 @@ gameDisplay = pygame.display.set_mode((1600, 600))
 pygame.display.set_caption('T-Rex Runner')
 
 player_image = pygame.image.load("sprites_jogo/player.png")
-player_image = pygame.transform.scale(player_image, (60, 60))
-ground_image = pygame.image.load("sprites_jogo/ground.png")
+player_image = pygame.transform.scale(player_image, (40, 60))
+ground_image = pygame.image.load("sprites_jogo/ground.png").convert()
 ground_image = pygame.transform.scale(ground_image, (2600, 190))
-obstacle_image = pygame.image.load("sprites_jogo/obstacle.png")
+obstacle_image = pygame.image.load("sprites_jogo/obstacle.png").convert()
 obstacle_image = pygame.transform.scale(obstacle_image, (70, 70))
 
 obstacle_image_jump = pygame.image.load("sprites_jogo/tire.png")
@@ -19,8 +19,14 @@ obstacle_image_jump = pygame.transform.scale(obstacle_image_jump, (50, 50))
 
 tsunami_image = pygame.image.load("sprites_jogo/tornado.png")
 tsunami_image = pygame.transform.scale(tsunami_image, (500, 300))
-background = pygame.image.load("sprites_jogo/fundo_2.png")
+background = pygame.image.load("sprites_jogo/fundo_2.png").convert()
 background = pygame.transform.scale(background, (3200, 430))
+
+pygame.mixer.init()
+pygame.mixer.music.load("sprites_jogo/musica.mp3")
+pygame.mixer.music.set_volume(1.0)
+pygame.mixer.music.play(1)
+music_playing = True
 
 player_x = 400
 player_y = 400
@@ -39,9 +45,10 @@ score = 0
 obstacles = []
 obstacles_jump = []
 
-obstacles_jump_y = 350  
-obstacles_jump_speed = 2  
-obstacles_jump_direction = 1  
+obstacles_jump_y = 360
+obstacles_jump_speed = 2
+obstacles_jump_direction = 1
+
 
 def check_collision(player_x, player_y, obstacles):
     player_rect = pygame.Rect(player_x, player_y, player_image.get_width(), player_image.get_height())
@@ -49,6 +56,7 @@ def check_collision(player_x, player_y, obstacles):
         if player_rect.colliderect(obstacle):
             return True
     return False
+
 
 game_over = False
 game_over_text = None
@@ -58,13 +66,15 @@ game_over_font = pygame.font.Font(None, 70)
 
 clock = pygame.time.Clock()
 
+
 def save_score(name, score):
-    with open("scores2.txt", "a") as file:
+    with open("scores.txt", "a") as file:
         file.write(f"{name}: {score}\n")
 
+
 while True:
-    gameDisplay.fill((127,127,127))
-    
+    gameDisplay.fill((127, 127, 127))
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -76,11 +86,23 @@ while True:
         score += 0.095
 
         keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_m] and music_playing == True:
+            pygame.mixer.music.stop()
+            music_playing = False
+
+        if keys[pygame.K_u] and music_playing == False:
+            pygame.mixer.music.play()
+            music_playing = True
+
         if keys[pygame.K_SPACE] and player_y == player_y_limit:
             player_y_change = -18
         if player_y < player_y_limit:
-            player_y_change += 1.2
+            player_y_change += 0.9
         player_y += player_y_change
+
+        if keys[pygame.K_s] and player_y < player_y_limit:
+            player_y_change = +20
 
         if player_y > player_y_limit:
             player_y = player_y_limit
@@ -88,7 +110,7 @@ while True:
         ground_x -= ground_speed
         if ground_x <= -1600:
             ground_x = 0
-            
+
         background_x -= background_speed
         if background_x <= -2600:
             background_x = 1600
@@ -97,22 +119,23 @@ while True:
             obstacles.append(pygame.Rect(1600, 350, obstacle_image.get_width(), obstacle_image.get_height()))
 
         if random.randint(0, 500) < 2:
-            obstacles_jump.append(pygame.Rect(1600, obstacles_jump_y, obstacle_image_jump.get_width(), obstacle_image_jump.get_height()))
+            obstacles_jump.append(
+                pygame.Rect(1600, obstacles_jump_y, obstacle_image_jump.get_width(), obstacle_image_jump.get_height()))
 
-        for obstacle in obstacles:
+        for i, obstacle in enumerate(obstacles):
             obstacle.x -= obstacle_speed
-            
-        for obstacle in obstacles_jump:
-            obstacle.x -= obstacle_speed
-            
+
+        for i, obstacle in enumerate(obstacles_jump):
+            obstacle.x -= (obstacle_speed + 2)
+
         if check_collision(player_x, player_y, obstacles):
             game_over = True
             game_over_text = pygame.font.Font(None, 70).render("Game Over", True, (255, 0, 0))
-            
+
         if check_collision(player_x, player_y, obstacles_jump):
             game_over = True
-            game_over_text = pygame.font.Font(None, 70).render("Game Over", True, (255, 0, 0))           
-            
+            game_over_text = pygame.font.Font(None, 70).render("Game Over", True, (255, 0, 0))
+
     else:
         tsunami_x += tsunami_speed
         if tsunami_x > 1000:
