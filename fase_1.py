@@ -60,7 +60,7 @@ clock = pygame.time.Clock()
 
 def save_score(name, score):
     with open("scores.txt", "a") as file:
-        file.write(f"{name}: {score}\n")
+        file.write(f"Fase 1 - {name}: {score}\n")
 
 
 while True:
