@@ -1,2 +1,3 @@
-leo: 23
-leo: 27
+Fase 1 - leo: 30
+Fase 2 - leo: 25
+Fase 3 - leo: 47
