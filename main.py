@@ -6,7 +6,7 @@ import os
 pygame.init()
 
 gameDisplay = pygame.display.set_mode((1600, 600))
-pygame.display.set_caption('T-Rex Runner')
+pygame.display.set_caption('Disaster Run')
 
 menu_principal = True
 menu_jogar = False
